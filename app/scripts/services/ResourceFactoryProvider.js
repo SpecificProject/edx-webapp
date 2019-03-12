@@ -703,6 +703,14 @@
                     twoFactorConfigResource: defineResource(apiVer+"/twofactor/configure", {}, {
                         getAllConfigs: {method: 'GET', params: {}},
                         put: {method: 'PUT', params: {}}
+                    }),
+                    // edx changes starting point
+                    academicsResource : defineResource(apiVer + "/academics",{},{
+                        getAllAcademics : {method : 'GET', params: {}, isArray: true}
+                    }),
+                    academicsValueResource: defineResource(apiVer + "/academics/:academicYearId", {academicYearId: '@academicYearId'}, {
+                        getAcademicvalues: {method: 'GET', params: {}},
+                        update: { method: 'PUT', params: {}}
                     })
                 };
             }];

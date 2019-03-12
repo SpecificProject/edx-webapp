@@ -1,0 +1,92 @@
+<!--
+    @Author - Ram
+-->
+<div class="content-container" ng-controller="ViewAcademicYearController">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li class="active"><a href="#/academics">{{'label.anchor.manageacademicyear' | translate}}</a></li>
+        <li class="active">{{holiday.name}}</li>
+    </ul>
+    <script type="text/ng-template" id="activateAcademicYear.html">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.activateacademicyear' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <api-validate></api-validate>
+            <br>
+            <button class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+            <button class="btn btn-primary" ng-click="activate()">{{'label.button.confirm' | translate}}</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="deleteAcademicYear.html">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.deleteacademicyear' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <api-validate></api-validate>
+            <br>
+            <button class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+            <button class="btn btn-primary" ng-click="delete()">{{'label.button.confirm' | translate}}</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="closeAcademicYear.html">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.closeacademicyear' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <api-validate></api-validate>
+            <br>
+            <button class="btn btn-default" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+            <button class="btn btn-primary" ng-click="close()">{{'label.button.confirm' | translate}}</button>
+        </div>
+    </script>
+    <div class="card">
+        <div class="content">
+                <div class="">
+                    <div class="pull-right">
+                        <div class="form-group">
+                            <a ng-show="academicYearStatusPending" data-ng-click="activateAcademicYear()" class="btn btn-primary" has-permission='ACTIVATE_ACADEMIC_YEAR'><i
+                                    class="fa fa-unlock-alt "></i>
+                                {{ 'label.button.activate' | translate }}</a>
+                            <a ng-show="academicYearStatusActive" data-ng-click="closeAcademicYear()" class="btn btn-primary" has-permission='CLOSE_ACADEMIC_YEAR'><i
+                                    class="fa fa-lock"></i>
+                                {{ 'label.button.close' | translate }}</a>
+                            <a ng-show="academicYearStatusPending || academicYearStatusActive" href="#/editacademicyear/{{academicYearData.id}}"
+                               class="btn btn-primary" has-permission='UPDATE_ACADEMIC_YEAR'><i class="fa fa-edit "></i>&nbsp;&nbsp;{{ 'label.button.edit' | translate }}</a>
+                            <a ng-hide="academicYearStatusDeleted" data-ng-click="deleteAcademicYear()" class="btn btn-danger" has-permission='DELETE_ACADEMIC_YEAR'><i
+                                    class="fa fa-trash-o"></i>&nbsp;&nbsp;{{ 'label.button.delete' | translate }}</a>
+                        </div>
+                    </div>
+                    <h3 class="bolder">{{academicYearData.name}}</h3>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>{{ 'label.heading.name' | translate }}</td>
+                                    <td>{{academicYearData.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'label.heading.shortname' | translate }}</td>
+                                    <td>{{academicYearData.shortName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'label.heading.startdate' | translate }}</td>
+                                    <td>{{academicYearData.startDate | DateFormat}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'label.heading.enddate' | translate }}</td>
+                                    <td>{{academicYearData.endDate | DateFormat}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'label.heading.description' | translate }}</td>
+                                    <td ng-if="academicYearData.description != null">{{academicYearData.description}}</td>
+                                    <td ng-if="academicYearData.description == null">-</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
