@@ -1,0 +1,57 @@
+<!--
+    @Author - Ram
+-->
+<div class="content-container" data-ng-controller="AcademicsController">
+        <ul class="breadcrumb">
+            <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+            <li class="active">{{'label.anchor.manageacademicyear' | translate}}</li>
+        </ul>
+        <div class="card">
+            <div class="content">
+            <div class="row">
+                <div class="col-md-5">
+                    <input ng-model="filterText" type="text" class="form-control span marginbottom0px"  ng-keyup="onFilter()" placeholder="{{'label.input.filterbyname' | translate}}"/>
+                </div>
+           
+            <div class="col-md-5">
+                <!-- ToDo- based on future scope need to enable office for academic year
+                <select chosen="offices" name="office" id="office" ng-model="formData.officeId" class="form-control input-sm" data-ng-options="office.id as office.name for office in offices" data-ng-change="getHolidays()" value="{{office.id}}" required>
+                    <option class="displaynone" value="">{{'label.selectoffice' | translate}}</option>
+                </select> 
+                 -->
+            </div> 
+            <div class="col-md-2">
+                <a href="#/createacademicyear" class="btn btn-primary pull-right" has-permission='CREATE_ACADEMIC_YEAR'><i class="fa fa-plus "></i>&nbsp;&nbsp;{{'label.button.createacademicyear' | translate}}</a>
+            </div>
+            <br/>
+            <div class="">
+                    <span ng-show="creategroupform.office.$invalid && creategroupform.office.$dirty">
+                    <small class="error" ng-show="creategroupform.office.$error.required">{{'label.requiredfield' | translate}}</small>
+                </span>
+            </div>
+            <br/>
+            <table class="table">
+                <thead>
+                    <tr class="graybg">
+                        <th>{{'label.heading.academicname' | translate}}</th>
+                        <th>{{'label.heading.academicshortname' | translate}}</th>
+                        <th>{{'label.heading.academicsstartdate' | translate}}</th>
+                        <th>{{'label.heading.academicsenddate' | translate}}</th>
+                        <th>{{'label.heading.academicstatus' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="pointer-main" dir-paginate="academic in academics | orderBy:'fromDate' | filter:filterText | itemsPerPage: HolidaysPerPage" ng-show="holiday.status.value != 'Deleted'">
+                        <td class="pointer" data-ng-click="routeTo(academic.id)">{{academic.name}}</td>
+                        <td class="pointer" data-ng-click="routeTo(academic.id)">{{academic.shortName}}</td>
+                        <td class="pointer" data-ng-click="routeTo(academic.id)">{{academic.startDate | DateFormat}}</td>
+                        <td class="pointer" data-ng-click="routeTo(academic.id)">{{academic.endDate | DateFormat}}</td>
+                        <td class="pointer" data-ng-click="routeTo(academic.id)">{{academic.status.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+                <dir-pagination-controls boundary-links="true" template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>
+    </div>
+    </div>
+    

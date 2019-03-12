@@ -1,0 +1,87 @@
+<!--
+    @author - Ram
+-->
+<div class="content-container" ng-controller="EditAcademicYearController">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li class="active"><a href="#/academics">{{'label.anchor.manageacademicyear' | translate}}</a></li>
+        <li><a href="#/viewacademicyear/{{academicYearData.id}}">{{academicYearData.name}}</a></li>
+        <li class="active">{{'label.anchor.editacademicyear' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{'label.heading.editacademicyear' | translate}}</h4>
+            </div>
+            <br/>
+            
+        <form name="updateacademicyearform" novalidate="" class="form-horizontal" rc-submit="submit()">
+          <api-validate></api-validate>
+          <fieldset>
+              <div class="form-group">
+                  <label class="control-label col-sm-2">{{ 'label.input.name' | translate }}<span class="required">*</span></label>
+
+                  <div class="col-sm-3">
+                      <input id="name" ng-autofocus="true" type="text" name="name" ng-model="formData.name"
+                             class="form-control" required late-Validate/>
+                  </div>
+                  <div class="col-sm-3">
+                      <form-validate valattributeform="updateacademicyearform" valattribute="name"/>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                      <label class="control-label col-sm-2">{{ 'label.input.shortname' | translate }}<span class="required">*</span></label>
+
+                      <div class="col-sm-3">
+                          <input id="shortname" type="text" name="shortname" ng-model="formData.shortName"
+                                 class="form-control" required late-Validate/>
+                      </div>
+                      <div class="col-sm-3">
+                          <form-validate valattributeform="updateacademicyearform" valattribute="shortname"/>
+                      </div>
+              </div>
+
+              <div class="form-group">
+                  <div>
+                      <label class="control-label col-sm-2">{{ 'label.input.startdate' | translate }}<span
+                              class="required">*</span></label>
+
+                      <div class="col-sm-3">
+                          <input id="startDate" name="startDate" sort type="text" datepicker-pop="dd MMMM yyyy" ng-model="date.startDate" is-open="opened" min="minDat"
+                          max="'2050-06-22'" class="form-control" required/>
+                      </div>
+                  </div>
+                  <div>
+                      <label class="control-label col-sm-1">{{ 'label.input.enddate' | translate }}<span
+                              class="required">*</span></label>
+
+                      <div class="col-sm-3">
+                          <input id="endDate" name="endDate" sort type="text" datepicker-pop="dd MMMM yyyy"
+                                 ng-model="date.endDate" is-open="opened1" min="minDate" max="'2050-06-22'"
+                                 class="form-control" required/>
+
+                          <span class="error" ng-if="secondError">{{ 'validation.msg.academicyear.enddate.cannot.be.before.startdate' | translate }}</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-2">{{ 'label.input.description' | translate }}</label>
+
+                  <div class="col-sm-3">
+                      <input id="" type="text" data-ng-model="formData.description" class="form-control"/>
+                  </div>
+              </div>
+              <div class="col-md-offset-3">
+                  <a id="cancel" class="btn btn-default" href="#/academics">{{'label.button.cancel' | translate}}</a>
+                  <button id="save" type="submit" class="btn btn-primary" has-permission='UPDATE_ACADEMIC_YEAR'>
+                      {{'label.button.save' | translate}}
+                  </button>
+              </div>
+
+          </fieldset>
+         </form>
+
+        </div>
+    </div>
+</div>
